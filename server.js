@@ -28,10 +28,17 @@ const {
 } = require('./models');
 
 const app = express();
+
+// تفعيل CORS الشامل لجميع الأصول والروابط مع السماح بكل الهيدرز
 app.use(cors({
-  origin: '*',
+  origin: true,
+  credentials: true,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin', 'Access-Control-Allow-Headers', 'Access-Control-Request-Method', 'Access-Control-Request-Headers']
+}));
+
+// التعامل السريع مع طلبات Preflight (OPTIONS) لضمان عدم الحظر
+app.options('*', cors());
 }));
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
