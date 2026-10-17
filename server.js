@@ -39,7 +39,7 @@ app.use(cors({
 
 // التعامل السريع مع طلبات Preflight (OPTIONS) لضمان عدم الحظر
 app.options('*', cors());
-}));
+
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use('/uploads', express.static(uploadsDir));
@@ -1284,7 +1284,7 @@ app.get('/api/courses/:id/lessons', authMiddleware, async (req, res) => {
 
 // 🔒 Unified course endpoint — uses optionalAuth:
 //   • Unauthenticated or not-enrolled → returns course info WITHOUT video URLs
-//   • Enrolled student or admin       → returns full course WITH video URLs (saves a second /lessons call)
+//   • Enrolled student or admin        → returns full course WITH video URLs (saves a second /lessons call)
 app.get('/api/courses/:id', optionalAuth, async (req, res) => {
   try {
     // If user provided a token that was expired (>60d) or invalid, return 401 so frontend refreshes or redirects
@@ -3248,4 +3248,3 @@ if (!process.env.VERCEL) {
 }
 
 module.exports = app;
-
