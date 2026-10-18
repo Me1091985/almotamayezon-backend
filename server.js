@@ -8,7 +8,7 @@ const nodemailer = require('nodemailer');
 const path = require('path');
 const fs = require('fs');
 
-const PORT = process.env.PORT || 5005;
+const PORT = process.env.PORT || 3000;
 let uploadsDir = path.join(__dirname, 'uploads');
 try {
   if (!fs.existsSync(uploadsDir)) {
